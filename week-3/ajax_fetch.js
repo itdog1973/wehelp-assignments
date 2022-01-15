@@ -62,7 +62,7 @@ for (let i=0; i<8; i++){  //在html建立容器 放進圖片和景點名稱 8個
     item_pic.appendChild(img);
 
     let text_node = document.createTextNode(title_array[i]);
-    item_txt.appendC
+    item_txt.appendChild(text_node); 
     
 
     last_id=i; //這個是用來計算前8張圖片已經用過了
