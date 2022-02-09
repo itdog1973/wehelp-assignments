@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+{% block content %}
+    
+    <div class="error_message" >
+        {{ error_message }}
+    </div>
+    <a href="{{ url_for('home') }}" class="error_redirect"> 返回首頁</a>
+{% endblock content%}

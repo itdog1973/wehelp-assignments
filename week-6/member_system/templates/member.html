@@ -1,0 +1,5 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h3 class="member_message">{{username}}， 歡迎登入系統</h3>
+    <a href="{{ url_for('signout') }}" class="member_logout"> 登出系統</a>
+{% endblock content %}
