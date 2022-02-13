@@ -1,49 +1,39 @@
-# create a class to hold the sql query
 import mysql.connector
-import os
-HOST =os.getenv('HOST')
-USERDB = os.getenv('USERDB')
-PASSWORD = os.getenv('PASSWORD')
-PORT=os.getenv('PORT')
-DATABASE= os.getenv('DATABASE')
-class DbConnection():
-    def __init__ (self):
-        self.connection = mysql.connector.connect(host=HOST, 
-                                port=PORT, 
-                                user=USERDB, 
-                                password=PASSWORD, 
-                                database=DATABASE)
-        self.cursor = self.connection.cursor(buffered=True)
-
-    def getUserId(self, userid):
-        sql = 'SELECT * FROM `member` WHERE `username` = %s'
-        id = (userid,)
-        self.cursor.execute(sql, id)
-        result = self.cursor.fetchone()
-        return result
+from mysql.connector import pooling
 
 
-    def addUser(self, username, userid, password):
-        sql = 'INSERT INTO `member` (`name`,`username`,`password`) VALUES(%s, %s, %s)'
-        val = (f'{username}',f'{userid}',f'{password}')
-        self.cursor.execute(sql, val)
-        self.connection.commit()
-        return
+class Database: # 控制資料庫的時機
+    __connection_pool = None
 
-    def verifyUser(self,userid):
-        sql = 'SELECT `name`,`username`, `password` from `member` WHERE `username` = %s'
-        id = (userid,)
-        self.cursor.execute(sql,id)
-        result = self.cursor.fetchone()
-        return result
+    @classmethod
+    def initialise(cls, **kwargs): 
+        cls.__connection_pool = pooling.MySQLConnectionPool(pool_name='my_pool', **kwargs)
 
+    @classmethod
+    def get_connection(cls):
+        return cls.__connection_pool.get_connection()
 
-    def connectionClose(self):
-        try:
-            self.cursor.close()
-            self.connection.close()
-        except:
-            print("The connection is not yet closed")
+    @staticmethod
+    def return_connection(connection):
+        connection.close()
+
+    @classmethod
+    def close_all_connection(cls):
+        cls.connection_pool.closeall()
+
+class CursorFromConnection: # 配合with cluase使用
+    def __init__(self):
+        self.connection = None
+        self.cursor = None
+    def __enter__(self): # 執行With的時候就建立collection Pool
+        self.connection=Database.get_connection()
+        self.cursor = self.connection.cursor()
+        return self.cursor #回傳cursor 
+    def __exit__(self, exception_type, exception_value,exception_traceback):
+
+        if exception_value is not None:
+            self.connection.rollback() # 如果在與database互動的期間有任何error出現， 就把所有儲存在collection裏面的data全部刪除
         else:
-            print("The connection is closed")
-            return 
+            self.cursor.close() 
+            self.connection.commit()
+        Database.return_connection(self.connection) # 無論最後成功與否都會把collection放回去collection pool裏邊
