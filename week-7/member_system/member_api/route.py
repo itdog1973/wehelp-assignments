@@ -29,5 +29,5 @@ def change_name():
                 return {"ok":True}
         else:
             return {"error":True}
-    return redirect(url_for('home'))
+    return {"error":True}
 
