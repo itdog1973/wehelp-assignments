@@ -32,7 +32,7 @@ class CursorFromConnection: # 配合with cluase使用
     def __exit__(self, exception_type, exception_value,exception_traceback):
 
         if exception_value is not None:
-            self.connection.rollback() # 如果在與database互動的期間有任何error出現， 就把所有儲存在collection裏面的data全部刪除
+            self.connection.rollback() # 如果在與database互動的期間有任何error出現， 就把所有儲存在connection裏面的data全部刪除
         else:
             self.cursor.close() 
             self.connection.commit()

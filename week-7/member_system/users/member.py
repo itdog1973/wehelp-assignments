@@ -14,11 +14,11 @@ class Member: # 建立使用者類別
         with CursorFromConnection() as cursor:
                 cursor.execute('INSERT INTO member (name, username, password) VALUES (%s, %s, %s)',
                 (self.name, self.username, self.password))
-
-    def update_name_to_db(self, new_name):
+    @staticmethod
+    def update_name_to_db(update_name, current_username):
         with CursorFromConnection() as cursor:
-            print(new_name)
-            cursor.execute('UPDATE member SET name = %s  WHERE username = %s',(new_name,self.username))
+            cursor.execute('UPDATE member SET name = %s  WHERE username = %s',(update_name, current_username))
+            
     
     @classmethod
     def search_data_by_username(cls,username):

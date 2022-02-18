@@ -7,7 +7,7 @@ let query_btn = document.getElementById("btn");
             query_btn.onclick = function(){
                 let username = document.getElementById("username").value;
                 
-                fetch("/api/member?username="+username).then(function(response){
+                fetch("/api/members?username="+username).then(function(response){
                   return response.json();
                 }).then(function(result){
                     if (result["data"] === null){
