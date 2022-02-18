@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h3 class="member_message">{{username}}， 歡迎登入系統</h3>
+    <a href="{{ url_for('users.signout') }}" class="member_logout"> 登出系統</a>
+   
+    <form action="" class="member_form" onsubmit="return false;">
+        <h3> 查詢會員姓名</h3>
+        <input type="text" name="username" id="username" placeholder="請輸入會員帳號">
+        <button id="btn" class="btn">查詢</button>
+        <div>{{ name }}</div>
+        
+        <div id="name_response" class="answer">
+
+        </div>
+       
+    </form>
+
+    
+
+    <form action="" class="update_name_form" onsubmit="return false;">
+        <h3> 更新我的姓名</h3>
+        <input type="text" name="name" id="name" placeholder="請輸入新的名字">
+        <button id="update_btn" class="btn">更新</button>
+        <div class="response" id="update_response">
+
+        </div>
+    </form>
+    
+  
+{% endblock content %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+{% endblock scripts %}
+

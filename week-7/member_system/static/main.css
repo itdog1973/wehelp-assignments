@@ -1,0 +1,113 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+h1{
+    text-align: center;
+    padding: 20px 0;
+    background-color: hsla(220,30%,30%,1);
+    color: #fff;
+}
+
+.container{
+    height: 100%;
+    
+   
+}
+.register_form, .login_form{
+    width: 400px;
+    height: 300px;
+    text-align: center;
+    padding-top: 30px;
+    position: relative;
+    margin: auto;
+   
+}
+
+.register_form h2, .login_form h2{
+    margin-bottom: 10px;
+}
+
+.register_form .form-group, .login_form .form-group{
+    margin: 5px 0 5px;
+    font-size: 1.2rem;
+    vertical-align: bottom;
+}
+
+.register_form .form-group input, .login_form .form-group input{
+    line-height: 1.5;
+    border-radius: 3px;
+    outline: none;
+    display: inline-block;
+    vertical-align: middle;
+    width: 50%;
+    font-size: 1.1rem;
+    
+}
+
+.register_form .form-group label, .login_form .form-group label{
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1.5;
+    border-radius: 3px;
+    margin: 2px;
+       
+}
+
+.submit-btn .btn{
+    margin-top: 10px;
+    padding: 5px 8px;
+    font-size: 1.2rem;
+}
+
+.sucess{
+    background-color: #afa;
+    text-align: center;
+    padding: 10px 0;
+    font-weight: bold;
+    color: #333;
+}
+
+.danger{
+    background-color: #faf;
+    text-align: center;
+    padding: 10px 0;
+    font-weight: bold;
+    color: #333;
+}
+
+.member_message,.error_message{
+    text-align: center;
+    font-size: 1.3rem;
+    padding: 10px 0 ;
+
+}
+
+.member_logout, .error_redirect{
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    font-size: 1.3rem;
+}
+
+.member_form, .update_name_form{
+    margin: 30px 0;
+    text-align: center;
+}
+.member_form h3, .update_name_form h3{
+    margin: 10px 0;
+}
+.member_form input, .update_name_form input{
+    line-height: 1.9;
+    outline: none;
+}
+
+.member_form .btn, .update_name_form .btn{
+    padding: 3px;
+}
+
+.member_form .answer, .update_name_form .response{
+    margin-top: 15px;
+    height: 20px;
+}
